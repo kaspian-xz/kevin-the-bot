@@ -1,11 +1,12 @@
 
 ## Stage 1 : build with maven builder image with native capabilities
 FROM quay.io/quarkus/ubi-quarkus-native-image:22.3-java17 AS build
-COPY --chmod=755 --chown=quarkus:quarkus mvnw /code/mvnw
+COPY --chown=quarkus:quarkus mvnw /code/mvnw
 COPY --chown=quarkus:quarkus .mvn /code/.mvn
 COPY --chown=quarkus:quarkus pom.xml /code/
 USER quarkus
 WORKDIR /code
+RUN chmod 755 ./mvnw
 RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.1:go-offline
 COPY src /code/src
 RUN ./mvnw package -Dquarkus.package.type=uber-jar
