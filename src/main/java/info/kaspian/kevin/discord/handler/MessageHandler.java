@@ -16,13 +16,11 @@ public class MessageHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(MessageHandler.class);
 
-    private final EmptyMessageHandler emptyMessageHandler;
     private final PrivateMessageHandler privateMessageHandler;
     private final MentionRequestHandler mentionRequestHandler;
 
-    public MessageHandler(EmptyMessageHandler emptyMessageHandler, PrivateMessageHandler privateMessageHandler, MentionRequestHandler mentionRequestHandler) {
+    public MessageHandler(PrivateMessageHandler privateMessageHandler, MentionRequestHandler mentionRequestHandler) {
         LOG.info("MessageHandler created");
-        this.emptyMessageHandler = emptyMessageHandler;
         this.privateMessageHandler = privateMessageHandler;
         this.mentionRequestHandler = mentionRequestHandler;
     }
@@ -32,8 +30,6 @@ public class MessageHandler {
             privateMessageHandler.handle(message);
         } else if (isCurrentUserMentioned(message)) {
             mentionRequestHandler.handle(message);
-        } else {
-            emptyMessageHandler.handle(message);
         }
     }
 

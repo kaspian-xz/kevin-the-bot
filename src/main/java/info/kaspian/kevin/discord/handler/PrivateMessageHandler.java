@@ -20,7 +20,6 @@ import java.util.Objects;
 public class PrivateMessageHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(PrivateMessageHandler.class);
-
     private final ChatModelConnectorService chatModelConnectorService;
 
     public PrivateMessageHandler(ChatModelConnectorService chatModelConnectorService) {
@@ -50,7 +49,18 @@ public class PrivateMessageHandler {
                     private final StringBuilder sb = new StringBuilder();
 
                     @Override
+                    protected void onStart() {
+                        super.onStart();
+                        channel.sendTyping().queue();
+                    }
+
+                    @Override
                     public void onNext(String s) {
+                        if (sb.length() + s.length() > Message.MAX_CONTENT_LENGTH) {
+                            channel.sendMessage(sb.toString()).queue();
+                            channel.sendTyping().queue();
+                            sb.delete(0, sb.length());
+                        }
                         sb.append(s);
                     }
 

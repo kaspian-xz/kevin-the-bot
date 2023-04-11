@@ -36,7 +36,18 @@ public class MentionRequestHandler {
                     private final StringBuilder sb = new StringBuilder();
 
                     @Override
+                    protected void onStart() {
+                        super.onStart();
+                        message.getChannel().sendTyping().queue();
+                    }
+
+                    @Override
                     public void onNext(String s) {
+                        if (sb.length() + s.length() > Message.MAX_CONTENT_LENGTH) {
+                            message.reply(sb.toString()).queue();
+                            message.getChannel().sendTyping().queue();
+                            sb.delete(0, sb.length());
+                        }
                         sb.append(s);
                     }
 
