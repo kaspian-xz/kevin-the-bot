@@ -1,8 +1,27 @@
-# kevin
+# ChatGPT Discord Bot
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This is an open-source project for building a bot for Discord using the [Quarkus](https://quarkus.io/), the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Getting Started
+
+1. Obtain a Discord API key by creating a new bot account:
+
+- Go to the [Discord Developer Portal](https://discord.com/developers/applications) and create a new app.
+- Select "Bot" from the left-hand menu, click "Add Bot", and follow the instructions to create a bot account for your app.
+- Copy your bot token, which will be used as your Discord API key.
+
+2. Obtain an OpenAI API key:
+
+- Sign up for a free account on the [OpenAI website](https://beta.openai.com/signup/).
+- Create an API key by following the instructions in the [OpenAI API documentation](https://platform.openai.com/account/api-keys).
+
+3. Save the API keys in the ./config/application.properties file:
+
+```properties
+openai.apiKey=OPENAI_API_KEY
+discord.apiKey=DISCORD_API_KEY
+```
+
 
 ## Running the application in dev mode
 
@@ -10,8 +29,6 @@ You can run your application in dev mode that enables live coding using:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
-
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
 ## Packaging and running the application
 
@@ -30,19 +47,10 @@ If you want to build an _über-jar_, execute the following command:
 ```
 
 The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Contributing
 
-## Creating a native executable
+Contributions to this project are welcome. If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.
 
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
+## License
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/kevin-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+This project is licensed under the MIT License. See the LICENSE file for details.
