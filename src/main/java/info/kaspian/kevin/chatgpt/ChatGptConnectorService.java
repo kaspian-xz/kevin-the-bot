@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import java.time.Duration;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -29,6 +30,10 @@ public class ChatGptConnectorService implements ChatModelConnectorService {
     @ConfigProperty(name = "openai.apiKey")
     String apiKey;
 
+
+    @ConfigProperty(name = "openai.timeout", defaultValue = "20")
+    Long apiTimeoutSeconds;
+
     @ConfigProperty(name = "openai.model", defaultValue = "gpt-3.5-turbo")
     String model;
 
@@ -37,7 +42,7 @@ public class ChatGptConnectorService implements ChatModelConnectorService {
     @PostConstruct
     void init() {
         LOG.info("Starting ChatGPT client");
-        this.service = new OpenAiService(apiKey);
+        this.service = new OpenAiService(apiKey, Duration.ofSeconds(apiTimeoutSeconds));
     }
 
     @Override
