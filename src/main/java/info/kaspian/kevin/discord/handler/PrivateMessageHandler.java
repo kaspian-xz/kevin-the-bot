@@ -67,7 +67,7 @@ public class PrivateMessageHandler {
                     @Override
                     public void onError(Throwable throwable) {
                         LOG.error("Error while reading message", throwable);
-                        channel.sendMessage("Sorry, problem happened :( - {" + throwable.getMessage() + "}").queue();
+                        channel.sendMessage("Sorry, problem happened :(\n ```" + throwable.getMessage() + "```").queue();
                     }
 
                     @Override
