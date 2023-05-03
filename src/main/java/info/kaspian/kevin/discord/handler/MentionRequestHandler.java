@@ -54,7 +54,7 @@ public class MentionRequestHandler {
                     @Override
                     public void onError(Throwable throwable) {
                         LOG.error("Error while reading message", throwable);
-                        message.reply("Sorry, problem happened :(").queue();
+                        message.reply("Sorry, problem happened :( - {" + throwable.getMessage() + "}").queue();
                     }
 
                     @Override
