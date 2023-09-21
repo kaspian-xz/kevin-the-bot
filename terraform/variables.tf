@@ -14,4 +14,10 @@ variable "discord_api_key" {
   description = "Discord API Key"
 }
 
+variable "aws_key_name" {
+  description = "AWS ssh keypair name"
+}
 
+variable "ssh_private_key_path" {
+  description = "Local path to private SSH key for AWS instance"
+}

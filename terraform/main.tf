@@ -15,7 +15,7 @@ provider "aws" {
 resource "aws_instance" "kevin-instance" {
   ami           = "ami-0b9094fa2b07038b8" # Replace with your desired AMI ID
   instance_type = "t2.micro"              # Change instance type as needed
-  key_name      = "xps"                   # Replace with your SSH key pair name
+  key_name      = var.aws_key_name        # Replace with your SSH key pair name
 
   security_groups = ["network-security-group"] # Reference to the security group created below
 
@@ -35,7 +35,7 @@ resource "aws_instance" "kevin-instance" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("~/.ssh/amazon-xps.pem") # Replace with the path to your private SSH key
+      private_key = file("${var.ssh_private_key_path}")
       host        = self.public_ip
     }
   }
