@@ -1,0 +1,6 @@
+env.sh
+*.tfstate
+.terraform
+.*.lock.*
+terraform.tfvars
+*.backup
