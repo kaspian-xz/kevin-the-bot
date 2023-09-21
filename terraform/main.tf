@@ -29,7 +29,7 @@ resource "aws_instance" "kevin-instance" {
       "sudo yum install docker -y",       # Install Docker on Amazon Linux
       "sudo service docker start",        # Start the Docker service
       "sudo usermod -aG docker ec2-user", # Add the ec2-user to the docker group
-      "sudo docker run -d -e discord.apiKey=\"${var.discord_api_key}\" -e openai.apiKey=\"${var.openai_api_key}\" -e openai.model=\"${var.openai_api_model}\" -e openai.timeout=\"${var.openai_api_timeout}\" kaspian/kevin-the-bot:latest",
+      "sudo docker run -d --restart=always -e discord.apiKey=\"${var.discord_api_key}\" -e openai.apiKey=\"${var.openai_api_key}\" -e openai.model=\"${var.openai_api_model}\" -e openai.timeout=\"${var.openai_api_timeout}\" kaspian/kevin-the-bot:latest",
     ]
 
     connection {
